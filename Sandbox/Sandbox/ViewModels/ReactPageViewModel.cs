@@ -27,6 +27,10 @@ namespace Sandbox.ViewModels
         public ReactPageViewModel()
         {
             Init();
+            this.MyProperty = null;
+            MyProperty.ToLower();
+
+            throw new Exception();
         }
 
         private void Init()

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +16,11 @@ namespace Sandbox
 		{
 			InitializeComponent();
 
-			MainPage = new Sandbox.Views.ReactPage();
+            AppCenter.Start("android=b4422757-3589-40f4-a032-397227f0ee61;" + "uwp={Your UWP App secret here};" +
+                   "ios={Your iOS App secret here}",
+                   typeof(Analytics), typeof(Crashes));
+
+            MainPage = new Sandbox.Views.ReactPage();
 		}
 
 		protected override void OnStart ()
