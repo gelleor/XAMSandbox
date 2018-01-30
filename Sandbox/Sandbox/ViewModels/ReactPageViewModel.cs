@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using Akavache;
 
 namespace Sandbox.ViewModels
 {
@@ -27,10 +28,6 @@ namespace Sandbox.ViewModels
         public ReactPageViewModel()
         {
             Init();
-            this.MyProperty = null;
-            MyProperty.ToLower();
-
-            throw new Exception();
         }
 
         private void Init()
@@ -38,9 +35,7 @@ namespace Sandbox.ViewModels
             this.WhenAnyValue(x => x.MyProperty)
                 .Subscribe(c => MyProperty = c?.ToUpper());
 
-            this.ObservableForProperty(x => x.MyProperty,
-                x => x?.ToUpper());
-
+            BlobCache.InMemory.InsertObject("test", MyProperty);
 
             TapCommand = ReactiveCommand.CreateFromTask(async () => {
                 MyProperty = "Ner";

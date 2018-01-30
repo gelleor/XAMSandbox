@@ -16,17 +16,22 @@ namespace Sandbox
 		{
 			InitializeComponent();
 
-            AppCenter.Start("android=b4422757-3589-40f4-a032-397227f0ee61;" + "uwp={Your UWP App secret here};" +
-                   "ios={Your iOS App secret here}",
-                   typeof(Analytics), typeof(Crashes));
-
             MainPage = new Sandbox.Views.ReactPage();
-		}
+            bool isEnabled =  Crashes.IsEnabledAsync().Result;
+
+            var a =Crashes.HasCrashedInLastSessionAsync();
+            
+        }
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
+            AppCenter.Start("android=b4422757-3589-40f4-a032-397227f0ee61;" + "uwp={Your UWP App secret here};" +
+       "ios={Your iOS App secret here}",
+       typeof(Analytics), typeof(Crashes));
+
+            
+            // Handle when your app starts
+        }
 
 		protected override void OnSleep ()
 		{
